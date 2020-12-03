@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TextInput,
   ScrollView,
+  Image,
 } from "react-native";
 
 import firebase from "../database/firebase";
@@ -14,6 +15,8 @@ const AddUserScreen = (props) => {
     name: "",
     email: "",
     phone: "",
+    encargado: "",
+    fecha: "",
   };
 
   const [state, setState] = useState(initalState);
@@ -32,6 +35,8 @@ const AddUserScreen = (props) => {
           name: state.name,
           email: state.email,
           phone: state.phone,
+          encargado: state.encargado,
+          fecha: state.fecha,
         });
 
         props.navigation.navigate("Lista de router");
@@ -43,6 +48,10 @@ const AddUserScreen = (props) => {
 
   return (
     <ScrollView style={styles.container}>
+      <Image
+          style={{width: 150, height: 150,  marginTop:50, marginLeft: 80, marginBottom:30}}
+          source={{uri: 'https://img2.pngio.com/adsl-access-point-router-internet-wifi-signal-free-icon-of-access-point-icon-png-512_512.png'}}
+        />
       {/* Name Input */}
       <View style={styles.inputGroup}>
         <TextInput
@@ -69,6 +78,23 @@ const AddUserScreen = (props) => {
           placeholder="Contraseña"
           onChangeText={(value) => handleChangeText(value, "phone")}
           value={state.phone}
+        />
+      </View>
+
+       {/* Input */}
+       <View style={styles.inputGroup}>
+        <TextInput
+          placeholder="Encargado"
+          onChangeText={(value) => handleChangeText(value, "encargado")}
+          value={state.encargado}
+        />
+      </View>
+
+      <View style={styles.inputGroup}>
+        <TextInput
+          placeholder="Fecha de modificación"
+          onChangeText={(value) => handleChangeText(value, "fecha")}
+          value={state.fecha}
         />
       </View>
 

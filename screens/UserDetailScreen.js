@@ -6,6 +6,7 @@ import {
   Alert,
   ActivityIndicator,
   StyleSheet,
+  Image,
 } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 
@@ -17,6 +18,8 @@ const UserDetailScreen = (props) => {
     name: "",
     email: "",
     phone: "",
+    encargado: "",
+    fecha: "",
   };
 
   const [user, setUser] = useState(initialState);
@@ -64,6 +67,8 @@ const UserDetailScreen = (props) => {
       name: user.name,
       email: user.email,
       phone: user.phone,
+      encargado: user.encargado,
+      fecha: user.fecha,
     });
     setUser(initialState);
     props.navigation.navigate("Lista de cumpleañeros");
@@ -83,6 +88,10 @@ const UserDetailScreen = (props) => {
 
   return (
     <ScrollView style={styles.container}>
+      <Image
+          style={{width: 150, height: 150,  marginTop:50, marginLeft: 80, marginBottom:30}}
+          source={{uri: 'https://img2.pngio.com/adsl-access-point-router-internet-wifi-signal-free-icon-of-access-point-icon-png-512_512.png'}}
+        />
       <View>
         <TextInput
           placeholder="Nombre"
@@ -108,6 +117,24 @@ const UserDetailScreen = (props) => {
           style={styles.inputGroup}
           value={user.phone}
           onChangeText={(value) => handleTextChange(value, "phone")}
+        />
+      </View>
+      <View>
+        <TextInput
+          placeholder="Fecha de cumpleaños"
+          autoCompleteType="tel"
+          style={styles.inputGroup}
+          value={user.encargado}
+          onChangeText={(value) => handleTextChange(value, "encargado")}
+        />
+      </View>
+      <View>
+        <TextInput
+          placeholder="Fecha de cumpleaños"
+          autoCompleteType="tel"
+          style={styles.inputGroup}
+          value={user.fecha}
+          onChangeText={(value) => handleTextChange(value, "fecha")}
         />
       </View>
       <View style={styles.btn}>

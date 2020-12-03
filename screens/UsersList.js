@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, StyleSheet } from "react-native";
+import { Button, StyleSheet, Image } from "react-native";
 import { ListItem, Avatar } from "react-native-elements";
 import { ScrollView } from "react-native-gesture-handler";
 
@@ -12,12 +12,14 @@ const UserScreen = (props) => {
     firebase.db.collection("users").onSnapshot((querySnapshot) => {
       const users = [];
       querySnapshot.docs.forEach((doc) => {
-        const { name, email, phone } = doc.data();
+        const { name, email, phone, encargado, fecha } = doc.data();
         users.push({
           id: doc.id,
           name,
           email,
           phone,
+          encargado,
+          fecha,
         });
       });
       setUsers(users);
@@ -26,6 +28,10 @@ const UserScreen = (props) => {
 
   return (
     <ScrollView>
+      <Image
+          style={{width: 150, height: 150,  marginTop:50, marginLeft: 120, marginBottom:30}}
+          source={{uri: 'https://img2.pngio.com/adsl-access-point-router-internet-wifi-signal-free-icon-of-access-point-icon-png-512_512.png'}}
+        />
       <Button
         onPress={() => props.navigation.navigate("CreateUserScreen")}
         title="Nuevo Router"
@@ -45,11 +51,12 @@ const UserScreen = (props) => {
             <Avatar
               source={{
                 uri:
-                  "https://icon-library.com/images/wifi-icon-png/wifi-icon-png-26.jpg",
+                  "https://img2.pngio.com/adsl-access-point-router-internet-wifi-signal-free-icon-of-access-point-icon-png-512_512.png",
               }}
               rounded
             />
             <ListItem.Content>
+              <ListItem.Title>{user.name}</ListItem.Title>
               <ListItem.Title>{user.email}</ListItem.Title>
               <ListItem.Subtitle>{user.phone}</ListItem.Subtitle>
             </ListItem.Content>
